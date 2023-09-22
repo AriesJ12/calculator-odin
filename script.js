@@ -13,7 +13,7 @@ function divide(a, b) {
   return a / b;
 }
 
-function operate(firstNum, operator,secondNum) {
+function operate(firstNum, operator, secondNum) {
   switch (operator) {
     case "+":
       return add(firstNum, secondNum);
@@ -24,6 +24,6 @@ function operate(firstNum, operator,secondNum) {
     case "/":
       return divide(firstNum, secondNum);
     default:
-        return NaN;
+      return NaN;
   }
 }
