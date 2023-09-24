@@ -19,6 +19,10 @@ const btnRemove = document.querySelectorAll("button[data-type='remove']");
 
 btnRemove.forEach(but => but.addEventListener("click", removeUpdate))
 
+
+//event for change sign
+
+
 //choose the basic function
 function operate(firstNum, operator, secondNum) {
   switch (operator) {
@@ -48,6 +52,11 @@ function numberUpdate(event) {
   {
     DISPLAY.textContent =  VALUE;
     freshlyClick = false;
+    return;
+  }
+
+  if(VALUE === "." && DISPLAY.textContent.includes("."))
+  {
     return;
   }
   DISPLAY.textContent = DISPLAY.textContent + VALUE;
