@@ -37,6 +37,7 @@ function operate(firstNum, operator, secondNum) {
 
 //updates upon clicking an operation
 let freshlyClick = true;
+let firstPair = true;
 
 //update the display
 function numberUpdate(event) {
@@ -60,16 +61,28 @@ function operationUpdate(event) {
 
   num2OrRaw = +DISPLAY.textContent;
 
+  if(firstPair)
+  {
+    num1OrResult = num2OrRaw;
+    firstPair = false;
+  }
+  else
+  {
+    num1OrResult = operate(num1OrResult, globalOperator, num2OrRaw);
+  }
+
   //stops = from changing the oper
   if (VALUE !== "=") {
     globalOperator = VALUE;
   }
 
-  num1OrResult = operate(num1OrResult, globalOperator, num2OrRaw);
-
   num2OrRaw =0;
 
   DISPLAY.textContent = num1OrResult;
+  if(VALUE === "=")
+  {
+    firstPair = true;
+  }
 }
 
 
@@ -83,6 +96,7 @@ function removeUpdate(event) {
     num1OrResult = 0;
     globalOperator = "";
     num2OrRaw = 0;
+    firstPair = true;
   } else {
     DISPLAY.textContent = DISPLAY.textContent.slice(
       0,
