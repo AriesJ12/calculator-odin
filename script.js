@@ -21,6 +21,14 @@ btnRemove.forEach(but => but.addEventListener("click", removeUpdate))
 
 
 //event for change sign
+const btnSign = document.querySelector("button[data-type='sign']");
+
+btnSign.addEventListener("click", function(){
+  const DISPLAY = document.querySelector(".display");
+  const negativeOne = -1;
+
+  DISPLAY.textContent = +DISPLAY.textContent * negativeOne;
+});
 
 
 //choose the basic function
