@@ -1,17 +1,33 @@
-.container-display
-{
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    border: thin black solid;
+button {
+  height: 100px;
+  width: 100px;
 }
 
-.display
+
+body {
+    padding: 2rem;
+}
+
+.container {
+  margin: auto;
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  border: thin black solid;
+  border-radius: 5px;
+}
+
+[data-value="0"] {
+  flex-grow: 1;
+}
+
+p
 {
-    height: 50px;
-    width: 50%;
-    margin: 0;
-    margin-top: 1rem;
+    width: 400px;
+    height: 100px;
     text-align: right;
-    border: thin black solid;
+    font-size: 3rem;
+    margin: 32px;
+    border: thin solid black;
+    border-radius: 5px;
 }
