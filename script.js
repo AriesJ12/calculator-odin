@@ -3,7 +3,6 @@ let num1OrResult = 0;
 let globalOperator = "";
 let num2OrRaw = 0;
 
-
 //events for numbers
 const btnNumbers = document.querySelectorAll("button[data-type='number']");
 
@@ -17,19 +16,17 @@ btnOperation.forEach((but) => but.addEventListener("click", operationUpdate));
 //events for removal
 const btnRemove = document.querySelectorAll("button[data-type='remove']");
 
-btnRemove.forEach(but => but.addEventListener("click", removeUpdate))
-
+btnRemove.forEach((but) => but.addEventListener("click", removeUpdate));
 
 //event for change sign
 const btnSign = document.querySelector("button[data-type='sign']");
 
-btnSign.addEventListener("click", function(){
+btnSign.addEventListener("click", function () {
   const DISPLAY = document.querySelector(".display");
   const negativeOne = -1;
 
   DISPLAY.textContent = +DISPLAY.textContent * negativeOne;
 });
-
 
 //choose the basic function
 function operate(firstNum, operator, secondNum) {
@@ -56,15 +53,17 @@ function numberUpdate(event) {
   const VALUE = event.target.dataset.value;
   const DISPLAY = document.querySelector(".display");
 
-  if (freshlyClick)
-  {
-    DISPLAY.textContent =  VALUE;
+  if (freshlyClick) {
+    DISPLAY.textContent = VALUE;
     freshlyClick = false;
     return;
   }
-
-  if(VALUE === "." && DISPLAY.textContent.includes("."))
+  if(overflowCounter())
   {
+    return;
+  }
+
+  if (VALUE === "." && DISPLAY.textContent.includes(".")) {
     return;
   }
   DISPLAY.textContent = DISPLAY.textContent + VALUE;
@@ -78,13 +77,10 @@ function operationUpdate(event) {
 
   num2OrRaw = +DISPLAY.textContent;
 
-  if(firstPair)
-  {
+  if (firstPair) {
     num1OrResult = num2OrRaw;
     firstPair = false;
-  }
-  else
-  {
+  } else {
     num1OrResult = operate(num1OrResult, globalOperator, num2OrRaw);
   }
 
@@ -93,21 +89,19 @@ function operationUpdate(event) {
     globalOperator = VALUE;
   }
 
-  num2OrRaw =0;
-
+  num2OrRaw = 0;
   DISPLAY.textContent = num1OrResult;
-  if(VALUE === "=")
-  {
+
+
+  if (VALUE === "=") {
     firstPair = true;
   }
 }
 
-
 //update upon click of clear and delete(must reset variables when cleared)
 function removeUpdate(event) {
-
   const DISPLAY = document.querySelector(".display");
-  const VALUE = event.target.dataset.value; 
+  const VALUE = event.target.dataset.value;
   if (VALUE === "clear") {
     DISPLAY.textContent = "";
     num1OrResult = 0;
@@ -120,4 +114,12 @@ function removeUpdate(event) {
       DISPLAY.textContent.length - 1
     );
   }
+}
+
+function overflowCounter()
+{
+  const DISPLAY = document.querySelector(".display");
+  const MAX_DISPLAY = 10;
+
+  return DISPLAY.textContent.length >= MAX_DISPLAY ? true : false;
 }
