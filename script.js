@@ -1,47 +1,36 @@
 "use strict";
 
-const buttons = document.querySelectorAll("button");
+const btnNumbers = document.querySelectorAll("button[data-type='number']");
 
-buttons.forEach(but => but.addEventListener("click", update));
+btnNumbers.forEach(but => but.addEventListener("click", numberUpdate));
 
 
-//basic functions
-function add(a, b) {
-  return a + b;
-}
-function minus(a, b) {
-  return a - b;
-}
-function multiply(a, b) {
-  return a * b;
-}
-function divide(a, b) {
-  return a / b;
-}
 
 //choose the basic function
 function operate(firstNum, operator, secondNum) {
   switch (operator) {
     case "+":
-      return add(firstNum, secondNum);
+      return firstNum + secondNum;
     case "-":
-      return minus(firstNum, secondNum);
+      return firstNum - secondNum;
     case "*":
-      return multiply(firstNum, secondNum);
+      return firstNum * secondNum;
     case "/":
-      return divide(firstNum, secondNum);
+      return firstNum / secondNum;
     default:
       return NaN;
   }
 }
 
-function update(event)
+//update the display
+function numberUpdate(event)
 {
-  //append the value
-  append(event);
 
-  //call operate
+  const VALUE = event.target.dataset.value;
+  const DISPLAY = document.querySelector(".display");
 
+
+  DISPLAY.textContent = DISPLAY.textContent + VALUE;
 }
 
 function append(event)
@@ -55,7 +44,7 @@ function append(event)
   {
     DISPLAY.textContent = DISPLAY.textContent + VALUE;
   }
-  else if (TYPE === "operation")
+  else if (TYPE === "operation" && DISPLAY.textContent !== "")
   {
     DISPLAY.textContent = `${DISPLAY.textContent} ${VALUE} `;
   }
